@@ -1,0 +1,16 @@
+services:
+  haven:
+    container_name: haven
+    image: haven
+    build: .
+    env_file: .env
+    ports:
+      - 3355:3355
+    volumes:
+      - ./blossom:/haven/blossom
+      - ./config/relays_blastr.json:/haven/relays_blastr.json
+      - ./config/relays_import.json:/haven/relays_import.json
+    deploy:
+      resources:
+        limits:
+          memory: 2GB
