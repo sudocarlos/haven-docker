@@ -1,7 +1,12 @@
 FROM golang AS build
-RUN git clone https://github.com/bitvora/haven.git && cd haven && go build
+
+WORKDIR /
+RUN git clone https://github.com/bitvora/haven.git
+WORKDIR /haven
+RUN go build
 
 FROM debian
-COPY --from=build /go/haven/haven /haven/app
-CMD ["/haven/app"]
+COPY --from=build /go/haven /haven
+WORKDIR /haven
+CMD ["/haven/haven"]
 EXPOSE 3355
