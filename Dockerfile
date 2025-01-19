@@ -1,12 +1,17 @@
-FROM golang AS build
+FROM golang AS builder
 
-WORKDIR /
-RUN git clone https://github.com/bitvora/haven.git
-WORKDIR /haven
-RUN go build
+ARG TAG=master
 
-FROM debian
-COPY --from=build /go/haven /haven
+RUN git clone https://github.com/bitvora/haven.git && \
+  cd haven && \
+  git checkout $TAG && \
+  go install
+
+FROM fedora
+
+COPY --from=builder /go/haven /haven
+COPY --from=builder /go/bin/haven /haven/haven
+
 WORKDIR /haven
-CMD ["/haven/haven"]
+CMD ["./haven"]
 EXPOSE 3355

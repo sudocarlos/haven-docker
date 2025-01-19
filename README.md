@@ -2,7 +2,6 @@
 
 This repo is used to maintain a docker image of [bitvora/haven](https://github.com/bitvora/haven).
 
-
 ## Usage
 
 1. Create copies of the example files in this repo

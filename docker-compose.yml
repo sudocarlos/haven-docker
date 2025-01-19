@@ -1,20 +1,14 @@
 services:
   haven:
-    # https://docs.docker.com/reference/compose-file/services/#container_name
     container_name: haven
-    # https://docs.docker.com/reference/compose-file/services/#image
     image: haven
-    # https://docs.docker.com/reference/compose-file/services/#build
     build: .
-    # https://docs.docker.com/reference/compose-file/services/#env_file
     env_file: .env
-    # https://docs.docker.com/reference/compose-file/services/#ports
     ports:
       - 3355:3355
-    # https://docs.docker.com/reference/compose-file/services/#volumes
     volumes:
       - ./blossom:/haven/blossom
-      - ./.env:/haven/.env
+      - ./db:/haven/db
       - ./relays_blastr.json:/haven/relays_blastr.json
       - ./relays_import.json:/haven/relays_import.json
     deploy:

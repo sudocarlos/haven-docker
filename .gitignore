@@ -1,4 +1,7 @@
 blossom/
+db/
+.DS_Store
 .env
+haven
 relays_blastr.json
 relays_import.json
