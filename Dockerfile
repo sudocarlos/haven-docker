@@ -25,5 +25,5 @@ COPY --from=builder /go/haven /haven
 COPY --from=builder /go/bin/haven /haven/haven
 
 WORKDIR /haven
-CMD ["./haven"]
+ENTRYPOINT ["./haven"]
 EXPOSE 3355

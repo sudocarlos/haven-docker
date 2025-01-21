@@ -2,6 +2,7 @@ services:
   haven:
     container_name: haven
     image: haven
+    command: ["--import"]
     build: .
     env_file: .env
     ports:
