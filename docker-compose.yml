@@ -11,6 +11,8 @@ services:
       - ./db:/haven/db
       - ./relays_blastr.json:/haven/relays_blastr.json
       - ./relays_import.json:/haven/relays_import.json
+    restart: unless-stopped
+    init: true
     deploy:
       resources:
         limits:
