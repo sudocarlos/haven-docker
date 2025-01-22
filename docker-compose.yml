@@ -1,7 +1,7 @@
 services:
   haven:
     container_name: haven
-    image: haven
+    image: sudocarlos/haven
     build: .
     env_file: .env
     ports:
