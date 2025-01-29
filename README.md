@@ -20,6 +20,13 @@ This repo is used to maintain a docker image of [bitvora/haven](https://github.c
     docker logs -f haven # follow container logs
     ```
 
+### Migrating from databases created in older versions of Haven
+
+Haven versions 1.0.3 and earlier did not replace outdated notes. While this does not impact the relay's core 
+functionality, it can lead to a bloated database, reduced performance, and bugs in certain clients. For this reason, it
+is recommended to delete old databases and start fresh, optionally [re-importing](#import-notes) previous notes.
+
+
 ### Import notes
 
 1. Stop the container
@@ -40,7 +47,9 @@ This repo is used to maintain a docker image of [bitvora/haven](https://github.c
     2025/01/22 04:40:35 📦 importing notes
     2025/01/22 04:40:40 📦 imported 22 owner notes
     ...
-    2025/01/22 04:41:01 📦 imported 12345 tagged notes
+    2025/01/22 04:41:01 ✅ owner note import complete! 
+    2025/01/22 04:41:01 📦 importing inbox notes, please wait 2 minutes
+    2025/01/22 04:41:01 📦 imported 2797 tagged notes
     2025/01/22 04:41:01 ✅ tagged import complete. please restart the relay
     ```
 
