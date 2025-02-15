@@ -2,6 +2,7 @@
 
 This repo is used to maintain a docker image of [bitvora/haven](https://github.com/bitvora/haven).
 
+
 ## Usage
 
 1. Create copies of the example files in this repo
@@ -20,14 +21,34 @@ This repo is used to maintain a docker image of [bitvora/haven](https://github.c
     docker logs -f haven # follow container logs
     ```
 
-### Migrating from databases created in older versions of Haven
+
+## Enabling Tor
+
+1. Set `TOR_ENABLED=1` in `.env`
+1. Start the relay with docker compose
+
+    ```bash
+    docker compose up -d
+    docker logs -f haven # follow container logs
+    ```
+
+1. View your hidden service address
+
+    ```bash
+    docker compose exec haven cat /var/lib/tor/haven/hostname
+    ```
+
+1. Haven will be available at `ws://<hidden-service-address>.onion`
+
+
+## Migrating from databases created in older versions of Haven
 
 Haven versions 1.0.3 and earlier did not replace outdated notes. While this does not impact the relay's core 
 functionality, it can lead to a bloated database, reduced performance, and bugs in certain clients. For this reason, it
 is recommended to delete old databases and start fresh, optionally [re-importing](#import-notes) previous notes.
 
 
-### Import notes
+## Import notes
 
 1. Stop the container
 
