@@ -1,5 +1,7 @@
 blossom/
+data/
 db/
+tor/
 .DS_Store
 .env
 haven
