@@ -4,7 +4,7 @@ ARG TAG=v1.0.5
 
 RUN git clone https://github.com/bitvora/haven.git && \
   cd haven && \
-  git checkout $TAG && \
+  go get github.com/fiatjaf/khatru@3da898cec7b45fb32d25e63652e0210607f62163 && \
   go install -v
 
  
