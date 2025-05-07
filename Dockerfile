@@ -3,8 +3,9 @@ FROM golang AS builder
 ARG TAG=v1.0.5
 
 RUN git clone https://github.com/bitvora/haven.git && \
+  git clone https://github.com/sudocarlos/khatru.git && \
   cd haven && \
-  go get github.com/sudocarlos/khatru && \
+  go mod edit -replace github.com/fiatjaf/khatru=../khatru && \
   go install -v
  
 # From docker-library/golang/1.23/bookworm/Dockerfile
