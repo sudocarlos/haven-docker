@@ -4,9 +4,8 @@ ARG TAG=v1.0.5
 
 RUN git clone https://github.com/bitvora/haven.git && \
   cd haven && \
-  go get github.com/fiatjaf/khatru@3da898cec7b45fb32d25e63652e0210607f62163 && \
+  go get github.com/sudocarlos/khatru && \
   go install -v
-
  
 # From docker-library/golang/1.23/bookworm/Dockerfile
 # install cgo-related dependencies
@@ -33,7 +32,6 @@ Components: main \n\
 Signed-By: /usr/share/keyrings/deb.torproject.org-keyring.gpg' | \
 		tee /etc/apt/sources.list.d/deb.torproject.org.sources > /dev/null; \
 	apt-get install -y --no-install-recommends tor
-
 
 COPY --from=builder /go/haven /haven
 COPY --from=builder /go/bin/haven /haven/haven
