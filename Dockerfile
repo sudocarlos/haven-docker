@@ -1,6 +1,6 @@
 FROM golang AS builder
 
-ARG TAG=v1.0.5
+ARG TAG=6127cb3472182642383037385b1b43bbc1e11ad2
 
 RUN git clone https://github.com/bitvora/haven.git && \
   cd haven && \
