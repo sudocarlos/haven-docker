@@ -10,7 +10,7 @@ PLATFORM=linux/amd64
 version=`awk -F "=" '/TAG=/{print $NF}' Dockerfile`
 echo "Building version: $version"
 # run build
-docker buildx build -t $USERNAME/$IMAGE:latest -t $USERNAME/$IMAGE:$version --push .
+docker buildx build --no-cache -t $USERNAME/$IMAGE:latest -t $USERNAME/$IMAGE:$version --push .
 # tag it
 git add -A
 git commit -m "haven-docker $version"

@@ -1,12 +1,12 @@
 FROM golang AS builder
 
-ARG TAG=6127cb3472182642383037385b1b43bbc1e11ad2
+ARG TAG=v1.0.5.1
 
 RUN git clone https://github.com/bitvora/haven.git && \
+  git clone https://github.com/fiatjaf/khatru.git && \
   cd haven && \
-  git checkout $TAG && \
+  go mod edit -replace github.com/fiatjaf/khatru=../khatru && \
   go install -v
-
  
 # From docker-library/golang/1.23/bookworm/Dockerfile
 # install cgo-related dependencies
