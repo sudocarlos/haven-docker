@@ -1,9 +1,9 @@
 FROM golang AS builder
 
-ARG TAG=v1.0.5.1
+ARG TAG=v1.0.5.2
 
 RUN git clone https://github.com/bitvora/haven.git && \
-  git clone https://github.com/fiatjaf/khatru.git && \
+  git clone https://github.com/sudocarlos/khatru.git && \
   cd haven && \
   go mod edit -replace github.com/fiatjaf/khatru=../khatru && \
   go install -v
@@ -33,7 +33,6 @@ Components: main \n\
 Signed-By: /usr/share/keyrings/deb.torproject.org-keyring.gpg' | \
 		tee /etc/apt/sources.list.d/deb.torproject.org.sources > /dev/null; \
 	apt-get install -y --no-install-recommends tor
-
 
 COPY --from=builder /go/haven /haven
 COPY --from=builder /go/bin/haven /haven/haven
