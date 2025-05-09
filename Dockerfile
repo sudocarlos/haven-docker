@@ -3,7 +3,7 @@ FROM golang AS builder
 ARG TAG=v1.0.5
 
 RUN git clone https://github.com/bitvora/haven.git && \
-  git clone https://github.com/sudocarlos/khatru.git && \
+  git clone -b test-primal-ios https://github.com/sudocarlos/khatru.git && \
   cd haven && \
   go mod edit -replace github.com/fiatjaf/khatru=../khatru && \
   go install -v
