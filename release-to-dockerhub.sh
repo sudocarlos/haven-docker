@@ -1,19 +1,17 @@
 set -ex
 # SET THE FOLLOWING VARIABLES
-# docker hub username
-USERNAME=sudocarlos
-# image name
-IMAGE=haven
-# platforms
-PLATFORM=linux/amd64
-# bump version
-version=`awk -F "=" '/TAG=/{print $NF}' Dockerfile`
-echo "Building version: $version"
+USERNAME=sudocarlos # docker hub username
+IMAGE=haven # image name
+PLATFORM=linux/amd64 # platforms
+VERSION=`awk -F "=" '/TAG=/{print $NF}' Dockerfile` # bump version
+
 # run build
-docker buildx build -t $USERNAME/$IMAGE:latest -t $USERNAME/$IMAGE:$version --push .
+echo "Building version: $VERSION"
+docker buildx build --no-cache -t $USERNAME/$IMAGE:latest -t $USERNAME/$IMAGE:$VERSION --push .
+
 # tag it
 git add -A
-git commit -m "haven-docker $version"
-git tag -a "dockerhub-$version" -m "haven-docker $version"
+git commit -m "haven-docker $VERSION"
+git tag -a "dockerhub-$VERSION" -m "haven-docker $VERSION"
 git push
 git push --tags
