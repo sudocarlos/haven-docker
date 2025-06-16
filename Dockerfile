@@ -1,11 +1,11 @@
 FROM golang AS builder
 
-ARG TAG=v1.0.5.2
+ARG TAG=v1.0.5.3
+ARG COMMIT=ff3a9cf3dcf788d93d62e7e13ab25a8a077a666f
 
 RUN git clone https://github.com/bitvora/haven.git && \
-  git clone https://github.com/sudocarlos/khatru.git && \
   cd haven && \
-  go mod edit -replace github.com/fiatjaf/khatru=../khatru && \
+  git checkout ${COMMIT} && \
   go install -v
  
 # From docker-library/golang/1.23/bookworm/Dockerfile
