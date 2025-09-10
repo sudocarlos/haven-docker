@@ -1,7 +1,7 @@
 FROM golang AS builder
 
-ARG TAG=v1.0.6
-ARG COMMIT=de0a1ae15912ca9dc86a5c5a0778768ebba2a246
+ARG TAG=v1.1.0
+ARG COMMIT=cb9daef00c6b3498642b84c8e7ce0993e5d5ad6c
 
 RUN git clone https://github.com/bitvora/haven.git && \
   cd haven && \
