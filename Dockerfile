@@ -1,29 +1,20 @@
-FROM golang AS builder
-
-ARG TAG=v1.1.0
+ARG TAG=v1.1.0.1
 ARG COMMIT=cb9daef00c6b3498642b84c8e7ce0993e5d5ad6c
 
-RUN git clone https://github.com/bitvora/haven.git && \
-  cd haven && \
-  git checkout ${COMMIT} && \
-  go install -v
- 
-# From docker-library/golang/1.23/bookworm/Dockerfile
-# install cgo-related dependencies
-FROM buildpack-deps:bookworm-scm
+FROM debian:stable-slim
 
 SHELL ["/bin/bash", "-c"]
-RUN set -eux; \
+RUN set -ex; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
-		g++ \
-		gcc \
-		libc6-dev \
-		make \
-		pkg-config \
+		ca-certificates \
 		curl \
 		gpg \
 		apt-transport-https; \
+	curl -sSL -O https://github.com/bitvora/haven/releases/download/v1.1.0/haven_Linux_x86_64.tar.gz; \
+	mkdir /haven; \
+	tar -xvf haven_Linux_x86_64.tar.gz -C haven; \
+	rm -rf haven_Linux_x86_64.tar.gz; \
 	curl -fsSL https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | \
 		gpg --dearmor -o /usr/share/keyrings/deb.torproject.org-keyring.gpg; \
 	echo $'Types: deb \n\
@@ -34,8 +25,6 @@ Signed-By: /usr/share/keyrings/deb.torproject.org-keyring.gpg' | \
 		tee /etc/apt/sources.list.d/deb.torproject.org.sources > /dev/null; \
 	apt-get install -y --no-install-recommends tor
 
-COPY --from=builder /go/haven /haven
-COPY --from=builder /go/bin/haven /haven/haven
 COPY ./start.sh /start.sh
 
 ENTRYPOINT ["/start.sh"]
