@@ -7,7 +7,7 @@ services:
     ports:
       - 3355:3355
     volumes:
-      - ./data/blossom:/haven/blossom
+      - ./data/blossom:/haven/data/blossom
       - ./data/db:/haven/db
       - ./relays_blastr.json:/haven/relays_blastr.json
       - ./relays_import.json:/haven/relays_import.json
