@@ -140,7 +140,7 @@ for i in $(seq 1 30); do
   if [[ "$STATE" != "true" ]]; then
     break  # container exited
   fi
-  if docker logs "$CONTAINER" 2>&1 | grep -q "is booting up"; then
+  if docker exec "$CONTAINER" curl -sf http://localhost:3355 &>/dev/null; then
     STARTED=true
     break
   fi
