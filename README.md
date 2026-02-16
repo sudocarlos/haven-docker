@@ -1,5 +1,7 @@
 # HAVEN unofficial docker repo
 
+[![Docker](https://github.com/sudocarlos/haven-docker/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/sudocarlos/haven-docker/actions/workflows/docker-publish.yml)
+
 This repo is used to maintain a docker image of [bitvora/haven](https://github.com/bitvora/haven).
 
 
