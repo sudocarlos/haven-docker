@@ -13,7 +13,7 @@ haven-docker/
 ├── .env.example                    # All configuration (99 vars, env-only config)
 ├── relays_blastr.example.json      # Seed relay lists for blastr
 ├── relays_import.example.json      # Seed relay lists for import
-├── release-to-dockerhub.sh         # Manual DockerHub push + git tag
+├── Makefile                        # Dev, test, and release targets
 ├── data/                           # Runtime data (mounted volumes)
 │   ├── blossom/                    #   Blossom media storage
 │   ├── db/                         #   Database (badger or lmdb)
@@ -35,5 +35,5 @@ haven-docker/
 |-------|------|---------|
 | docker-packaging | `.agent/skills/docker-packaging/` | Dockerfile, compose, builds, volumes |
 | haven-config | `.agent/skills/haven-config/` | `.env` variables, relay JSONs, tuning |
-| ci-cd | `.agent/skills/ci-cd/` | GitHub Actions, release script, signing |
+| ci-cd | `.agent/skills/ci-cd/` | GitHub Actions, Makefile release, signing |
 | tor-integration | `.agent/skills/tor-integration/` | Tor hidden service setup |

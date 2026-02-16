@@ -26,7 +26,7 @@ description: Release a new Haven version to DockerHub and GHCR
 
 5. Push to DockerHub (requires `docker login`):
    ```bash
-   ./release-to-dockerhub.sh
+   make release
    ```
 
    This will also create a git tag `dockerhub-<version>` and push it.

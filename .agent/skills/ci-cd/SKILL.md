@@ -1,6 +1,6 @@
 ---
 name: ci-cd
-description: CI/CD pipeline for haven-docker including the GitHub Actions workflow for GHCR publishing, the manual DockerHub release script, cosign image signing, and version management. Use when modifying build automation, release processes, or image signing.
+description: CI/CD pipeline for haven-docker including the GitHub Actions workflow for GHCR publishing, Makefile-driven DockerHub release, cosign image signing, and version management. Use when modifying build automation, release processes, or image signing.
 ---
 
 # CI/CD
@@ -28,19 +28,21 @@ Located at `.github/workflows/docker-publish.yml`.
 ### Registry
 
 - **GHCR**: `ghcr.io/sudocarlos/haven-docker` (automated via Actions)
-- **DockerHub**: `sudocarlos/haven` (manual via `release-to-dockerhub.sh`)
+- **DockerHub**: `sudocarlos/haven` (manual via `make release`)
 
-## Manual DockerHub Release — `release-to-dockerhub.sh`
+## Manual DockerHub Release — `Makefile`
 
 ```bash
-./release-to-dockerhub.sh
+make release
 ```
 
-This script:
+This runs the `push` and `tag` targets:
 1. Extracts version from the `TAG=` line in `Dockerfile`
 2. Builds with `docker buildx` (no cache), pushes `latest` + version tags
 3. Commits all changes, creates an annotated git tag `dockerhub-<version>`
 4. Pushes commits and tags
+
+Individual steps can be run separately with `make push` or `make tag`.
 
 ### Prerequisites
 - Logged into DockerHub (`docker login`)
@@ -55,9 +57,9 @@ ARG TAG=v1.2.0-rc2
 ARG COMMIT=986c21b79c93779a449a52f6414ea267c83428bb
 ```
 
-The release script extracts the version with:
-```bash
-VERSION=`awk -F "=" '/TAG=/{print $NF}' Dockerfile`
+The Makefile extracts the version with:
+```makefile
+VERSION := $(shell awk -F '=' '/TAG=/{print $$NF}' Dockerfile)
 ```
 
-**To bump**: update `TAG` and `COMMIT` in `Dockerfile`, then run the release workflow.
+**To bump**: update `TAG` and `COMMIT` in `Dockerfile`, then run `make release`.
