@@ -1,5 +1,5 @@
-ARG TAG=v1.2.0-rc5
-ARG COMMIT=1c28aa4ba953ead482bfd769eba7b63786bf9a85
+ARG TAG=v1.2.0-rc6
+ARG COMMIT=5c645530ac085dd78fb0d1b24f873c1efa8f4430
 
 FROM golang AS builder
 
