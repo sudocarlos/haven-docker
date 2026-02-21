@@ -44,7 +44,7 @@ push:  ## Build and push to DockerHub
 tag:  ## Commit and git-tag the release
 	git add -A
 	git commit -m "haven-docker $(VERSION)"
-	git tag -a "dockerhub-$(VERSION)" -m "haven-docker $(VERSION)"
+	git tag -a "$(VERSION)" -m "haven-docker $(VERSION)"
 	git push
 	git push --tags
 
