@@ -2,7 +2,10 @@
 
 USERNAME   := sudocarlos
 IMAGE      := haven
-VERSION    := $(shell awk -F '=' '/TAG=/{print $$NF}' Dockerfile)
+# VERSION is the pinned Haven commit's short sha: a valid docker tag, stable
+# while the pinned commit stays pinned. (It used to parse TAG=, which is now a
+# branch name and an invalid docker tag.)
+VERSION    := $(shell awk -F '=' '/COMMIT=/{print substr($$NF,1,12)}' Dockerfile)
 
 .PHONY: build dev up down logs test release tag push clean
 

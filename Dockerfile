@@ -3,6 +3,13 @@ ARG COMMIT=4b8d38b2632171dfda1e3cb3935ea0fe29630ac3
 
 FROM golang AS builder
 
+# Re-declare the pre-FROM ARGs: ARGs declared before the first FROM are not
+# visible inside build stages, so without these two lines $TAG/$COMMIT expand
+# to empty and `git checkout $COMMIT` silently no-ops onto the fork's default
+# branch instead of the pinned commit.
+ARG TAG
+ARG COMMIT
+
 RUN git clone https://github.com/sudoagent1/haven.git && \
   cd haven && \
   git fetch origin $TAG && \
