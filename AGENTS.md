@@ -16,7 +16,7 @@ haven-docker/
 ├── Makefile                        # Dev, test, and release targets
 ├── data/                           # Runtime data (mounted volumes)
 │   ├── blossom/                    #   Blossom media storage
-│   ├── db/                         #   Database (badger or lmdb)
+│   ├── db/                         #   Database (lmdb or boltdb)
 │   └── tor/                        #   Tor hidden service keys
 └── .github/workflows/
     └── docker-publish.yml          # CI: build, push to GHCR, cosign

@@ -1,11 +1,12 @@
-ARG TAG=v1.2.0
-ARG COMMIT=95fb1e73aa0821596802dc7acf53dbd0d96e7287
+ARG TAG=chore/khatru-successor-bump
+ARG COMMIT=4b8d38b2632171dfda1e3cb3935ea0fe29630ac3
 
 FROM golang AS builder
 
-RUN git clone https://github.com/bitvora/haven.git && \
+RUN git clone https://github.com/sudoagent1/haven.git && \
   cd haven && \
-  git checkout $TAG && \
+  git fetch origin $TAG && \
+  git checkout $COMMIT && \
   go install -v
 
 FROM debian:stable-slim
@@ -26,11 +27,7 @@ RUN set -ex; \
 	mkdir /haven; \
 	curl -fsSL https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | \
 		gpg --dearmor -o /usr/share/keyrings/deb.torproject.org-keyring.gpg; \
-	echo $'Types: deb \n\
-URIs: https://deb.torproject.org/torproject.org \n\
-Suites: bookworm \n\
-Components: main \n\
-Signed-By: /usr/share/keyrings/deb.torproject.org-keyring.gpg' | \
+	printf 'Types: deb\nURIs: https://deb.torproject.org/torproject.org\nSuites: bookworm\nComponents: main\nSigned-By: /usr/share/keyrings/deb.torproject.org-keyring.gpg\n' | \
 		tee /etc/apt/sources.list.d/deb.torproject.org.sources > /dev/null; \
 	apt-get install -y --no-install-recommends tor
 

@@ -15,7 +15,7 @@ All configuration is in `.env` (copy from `.env.example`). No config files are b
 | `RELAY_URL` | — | Public-facing relay hostname (no `wss://`) |
 | `RELAY_PORT` | `3355` | Port Haven listens on |
 | `RELAY_BIND_ADDRESS` | `0.0.0.0` | Bind address (empty string = all interfaces) |
-| `DB_ENGINE` | `badger` | `badger` or `lmdb` (lmdb needs NVMe for stability) |
+| `DB_ENGINE` | `lmdb` | `lmdb` (default) or `boltdb`; badger is no longer available in this build |
 | `LMDB_MAPSIZE` | `0` | 0 = default (~273 GB), or size in bytes |
 | `BLOSSOM_PATH` | `blossom/` | Media storage directory inside container |
 | `TOR_ENABLED` | `0` | Set to `1` to start a Tor hidden service |
