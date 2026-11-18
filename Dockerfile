@@ -1,5 +1,5 @@
 ARG TAG=chore/khatru-successor-bump
-ARG COMMIT=4b8d38b2632171dfda1e3cb3935ea0fe29630ac3
+ARG COMMIT=36e7399a4fb0d19061ce5139a4511702a4c1c3ce
 
 FROM golang AS builder
 
